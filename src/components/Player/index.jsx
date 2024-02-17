@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-const Player = ({ initialPlayerName, playerSymbol }) => {
+const Player = ({ initialPlayerName, playerSymbol, isActive }) => {
   const [playerName, setPlayerName] = useState(initialPlayerName);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -14,7 +14,7 @@ const Player = ({ initialPlayerName, playerSymbol }) => {
   };
 
   return (
-    <li>
+    <li className={isActive ? "active" : undefined}>
       <span className="player">
         {!isEditing ? (
           <span className="player-name">{playerName}</span>
@@ -33,4 +33,5 @@ export default Player;
 Player.propTypes = {
   initialPlayerName: PropTypes.string.isRequired,
   playerSymbol: PropTypes.node.isRequired,
+  isActive: PropTypes.string.isRequired,
 };
