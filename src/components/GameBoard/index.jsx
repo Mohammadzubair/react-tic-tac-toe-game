@@ -1,7 +1,8 @@
+import { PropTypes } from "prop-types";
 import { useState } from "react";
 import { initialGameBoard } from "../../utils";
 
-const GameBoard = () => {
+const GameBoard = ({ onSelectedSquare, activePlayerSymbol }) => {
   const [gameBoard, setGameBoard] = useState(initialGameBoard);
 
   const handleSelectedSquare = (rowIndex, colIndex) => {
@@ -9,9 +10,10 @@ const GameBoard = () => {
       const udatedGameBoard = [
         ...prevGameBoard.map((innerAray) => [...innerAray]),
       ];
-      udatedGameBoard[rowIndex][colIndex] = "X";
+      udatedGameBoard[rowIndex][colIndex] = activePlayerSymbol;
       return udatedGameBoard;
     });
+    onSelectedSquare();
   };
 
   return (
@@ -36,3 +38,8 @@ const GameBoard = () => {
 };
 
 export default GameBoard;
+
+GameBoard.propTypes = {
+  onSelectedSquare: PropTypes.func.isRequired,
+  activePlayerSymbol: PropTypes.node.isRequired,
+};
